@@ -12,12 +12,6 @@ case.Config("NetworkSubnet", {"port2": {"SubnetNumber": 1, "IpAddrRange": "18.1.
 case.Config("TestDuration", 10)
 
 case.Apply(case.case_config)
-
-# Start the test case
-case.Start()
-
-# Monitor the test execution
+case.StartExistExample("20250507-17_47_17")
 case.Monitor()
-
-# Retrieve and get the test results layer2
 case.Getresult()
