@@ -6,3 +6,4 @@ __pycache__/
 *.py[cod]  # 同时忽略 .pyc, .pyo, .pyd 文件
 *.db  # 数据库文件
 Testscript/boofuzz-results/*.db  # boofuzz 结果目录
+*.log

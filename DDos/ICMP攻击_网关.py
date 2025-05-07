@@ -1,18 +1,18 @@
 
 # Import the ntsc module
-import ntsc
+from ntsc import ntsc
 
 # Create a new project object
 project = ntsc.CreateProject()
 
 # Connect to the server at IP address 192.168.15.100 and port 80
-project.Connect("192.168.15.97", 80)
+project.Connect("192.168.15.180", 80)
 
 # Log in to the server with username "admin" and password "admin"
 project.Login("admin", "admin")
 
 # Create a new test case of type "Ipv4FragAttack" with the name "Gateway"
-case = project.CreateCase("Ipv4FragAttack", "Gateway")
+case = project.CreateCase("ICMPSinglePacketAttack", "Gateway")
 
 # Configure the interfaces for the test case, using port1 and port2
 case.Config("Interface", "port1", "port2")
