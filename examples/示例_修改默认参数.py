@@ -12,7 +12,7 @@ project.Connect("192.168.15.100", 80)
 project.Login("admin", "admin")
 
 # Create a new test case of type "Rfc2544Throughput" with the name "Gateway"
-case = project.CreateCase("HttpCps", "Gateway")
+case = project.CreateCase("Rfc2544Throughput", "Gateway")
 
 # Configure the interfaces for the test case, using port1 and port2
 case.Config("Interface", "port1", "port2")
@@ -34,7 +34,39 @@ case.Config("NetworkSubnet", {"port2": {"SubnetNumber": 1, "IpAddrRange": "18.1.
 # case.Config("CaseObject", {"Variate": "默认邮件变量列表"})
 # case.Config("CaseObject", {"WebTestProjectName": "默认网络设备测试项目"})
 # case.Config("CaseObject", {"FileObject": "默认根网页请求"})
-case.Config("CaseObject", {"Monitor": "无", "Variate": "默认邮件变量列表", "WebTestProjectName": "默认网络设备测试项目", "FileObject": "默认根网页请求"})
+# case.Config("CaseObject", {"Monitor": "无", "Variate": "默认邮件变量列表", "WebTestProjectName": "默认网络设备测试项目", "FileObject": "默认根网页请求"})
+
+# Modify TestDuration. If not modified, use the default values
+# case.Config("TestDuration", 300)
+
+# Modify SimUser. If not modified, use the default values
+# case.Config("SimUser", 1)
+
+# Delay jitter calculation， values: disable, enable
+case.Config("Latency", "enable")
+
+# Flow direction; the available values are: enable, disable, both.
+# "enable" indicates two-way; "disable" indicates one-way; "both" means first one-way, then two-way
+case.Config("DualFlowMode", "both")
+
+# When the type of load transformation is fixed load, random load or custom load, this item needs to be specified.
+case.Config("FrameSizePolicy", {
+    # Frame length transformation mode; the available values are: List, Step, Random, iMix.
+    # "SizeChangeMode": "List",
+    # "FrameSizeFormat": "64,128,256,512,1024,1280,1518"
+
+    "SizeChangeMode": "Step",
+    "FrameSizeFormat": "64-128|+64"
+
+    # "SizeChangeMode": "Random",
+    # "FrameSizeFormat": "128-256"
+
+    # "SizeChangeMode": "iMix"
+})
+
+# The unit of test duration; the available values are: TimeSecond, PacketCount
+# case.Config("CycleDurationPolicy", {"CycleDurationUnit": "TimeSecond", "InitialCycleSecond": "600"})
+case.Config("CycleDurationPolicy", {"CycleDurationUnit": "PacketCount", "InitialCyclePacket": "5000"})
 
 # Apply all configurations to the test case
 case.Apply(case.case_config)

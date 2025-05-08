@@ -1,0 +1,67 @@
+
+一、通用参数
+#Interface 占用端口
+case.Config("Interface", "port1", "port2")
+
+#InterfaceCPU cpu核列表
+case.Config("InterfaceCPU", "port1:2", "port2:3")
+
+#NetworkSubnet 主机子网设置
+case.Config("NetworkSubnet", {"port1": {"SubnetNumber": 1, "IpAddrRange": "18.1.2.2", "Netmask": "16", "ServerIPRange": "18.1.1.2"}})
+
+#用户admin占用内存
+case.Config("UserApplyMemoryMB", 4)
+
+#用例大页内存占比
+case.Config("DPDKHugeMemoryPct", 50)
+
+#实例名称
+case.Config("TestName", "test1111111")
+
+#测试时长
+case.Config("TestDuration", 60)
+
+#对象配置，未填写的key使用默认值
+case.Config("CaseObject", {"Monitor": "无", "Variate": "默认邮件变量列表", "WebTestProjectName": "默认网络设备测试项目", "FileObject": "默认根网页请求"})
+
+#虚拟用户数量
+case.Config("SimUser", 1)
+
+
+--------------------------------------------------------------------------------------------------------------------------
+
+
+二、 专用参数
+
+- L2-3协议测试
+-- RFC基准测试
+--- RFC2544
+
+Latency 时延抖动计算
+# values: disable, enable
+case.Config("Latency", "enable")
+
+DualFlowMode 流量方向
+# values are: enable, disable, both.
+# "enable" indicates two-way; "disable" indicates one-way; "both" means first one-way, then two-way
+case.Config("DualFlowMode", "both")
+
+FrameSizePolicy 帧长变换模式
+case.Config("FrameSizePolicy", {
+    # values are: List, Step, Random, iMix.
+    # "SizeChangeMode": "List",
+    # "FrameSizeFormat": "64,128,256,512,1024,1280,1518"
+
+    "SizeChangeMode": "Step",
+    "FrameSizeFormat": "64-128|+64"
+
+    # "SizeChangeMode": "Random",
+    # "FrameSizeFormat": "128-256"
+
+    # "SizeChangeMode": "iMix"
+})
+
+CycleDurationPolicy 测试时长的单位
+# the available values are: TimeSecond, PacketCount
+# case.Config("CycleDurationPolicy", {"CycleDurationUnit": "TimeSecond", "InitialCycleSecond": "600"})
+case.Config("CycleDurationPolicy", {"CycleDurationUnit": "PacketCount", "InitialCyclePacket": "5000"})
