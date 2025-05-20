@@ -1,7 +1,7 @@
 from ntsc import ntsc
 
 project = ntsc.CreateProject()
-project.Connect("192.168.15.180", 80)
+project.Connect("20.1.1.100", 80)
 project.Login("admin", "admin")
 case = project.CreateCase("ICMPSinglePacketAttack", "Gateway")
 
